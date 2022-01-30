@@ -96,7 +96,6 @@ class MessageCardwNotify extends StatelessWidget {
               ),
             ),
             Container(
-              width: 30,
               height: 80,
               decoration: BoxDecoration(),
               child: Column(

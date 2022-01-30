@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:messenger/inc/app_theme.dart';
-import 'package:messenger/widgets/message_card.dart';
-import 'package:messenger/widgets/message_card_w_notify.dart';
-import 'package:messenger/widgets/story_wg.dart';
+import 'package:messenger/pages/feedpage.dart';
+import 'package:messenger/pages/homepage.dart';
+import 'package:messenger/pages/notificationpage.dart';
+import 'package:messenger/pages/profilepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,38 +18,44 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    textController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(scaffoldKey: scaffoldKey, textController: textController),
+      home: Home(),
     );
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({
     Key? key,
-    required this.scaffoldKey,
-    required this.textController,
   }) : super(key: key);
 
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final TextEditingController textController;
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int navIndex = 0;
+  List pages = [
+    HomePage(),
+    FeedPage(),
+    NotificationPage(),
+    ProfilePage(),
+  ];
+
+  void changeNav(int index) {
+    setState(() {
+      navIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor,
         automaticallyImplyLeading: false,
@@ -78,157 +85,27 @@ class Home extends StatelessWidget {
         elevation: 4,
       ),
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFEBEBEB),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: Color(0xFFA9A8AC),
-                            size: 15,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                              child: TextFormField(
-                                controller: textController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  hintText: 'Search',
-                                  hintStyle: GoogleFonts.poppins(
-                                    textStyle:
-                                        TextStyle(color: Color(0xFFA9A8AC)),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                ),
-                                style: GoogleFonts.poppins(
-                                  textStyle:
-                                      TextStyle(color: Color(0xFFA9A8AC)),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(-1, 0),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 5),
-                      child: Text(
-                        'Activities',
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(color: AppTheme.textColor),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 100,
-                    decoration: BoxDecoration(),
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        StoryWG(
-                            name: 'Emeline',
-                            imgsrc: 'assets/images/emeline.jpg'),
-                        StoryWG(
-                            name: 'Selma', imgsrc: 'assets/images/selma.jpg'),
-                        StoryWG(
-                            name: 'Sonia', imgsrc: 'assets/images/sonia.jpg'),
-                        StoryWG(name: 'Jean', imgsrc: 'assets/images/jean.jpg'),
-                        StoryWG(
-                            name: 'Emily', imgsrc: 'assets/images/emily.jpg'),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(-1, 0),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                      child: Text(
-                        'Messages',
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(color: AppTheme.textColor),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                  MessageCardwNotify(
-                    name: 'Selma',
-                    imgsrc: 'assets/images/selma.jpg',
-                    msg:
-                        'We are on the runways at the military hanger, there is a plane in it.',
-                    msgtime: '23 min',
-                    notifications: '3',
-                  ),
-                  MessageCard(
-                    name: 'Jean',
-                    imgsrc: 'assets/images/jean.jpg',
-                    msg: 'I recieved my new watch that i ordered from amazon.',
-                    msgtime: '33 min',
-                  ),
-                  MessageCard(
-                    name: 'Sonia',
-                    imgsrc: 'assets/images/sonia.jpg',
-                    msg:
-                        'I just arrived in the front of the school, i am waiting.. hurry ip!!',
-                    msgtime: '43 min',
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: changeNav,
+        currentIndex: navIndex,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
+        unselectedItemColor: Colors.grey.withOpacity(0.5),
+        selectedItemColor: Colors.black54,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.message_outlined), label: "messages"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_outlined), label: "feed"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_none_outlined),
+              label: "notification"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile"),
+        ],
       ),
+      body: pages[navIndex],
     );
   }
 }
