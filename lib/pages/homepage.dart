@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

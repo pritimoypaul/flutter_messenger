@@ -57,14 +57,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.primaryColor,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
           'Messenger',
           style: GoogleFonts.poppins(
-            textStyle: TextStyle(color: Colors.white),
+            textStyle: TextStyle(color: AppTheme.textColor),
             fontSize: 14,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
           ),
         ),
         actions: [
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
             color: Colors.white,
             icon: Icon(
               Icons.edit,
-              color: Colors.white,
+              color: AppTheme.secondaryColor,
               size: 15,
             ),
             onPressed: () {
@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         centerTitle: false,
-        elevation: 4,
+        elevation: 0,
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
