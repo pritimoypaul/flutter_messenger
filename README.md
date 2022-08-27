@@ -1,16 +1,19 @@
-# messenger
+# Flutter Messenger / Social media App
 
-Flutter messenger application
+This project was created with Flutter and Firebase by Pritimoy Paul.
 
-## Getting Started
+Some features:
 
-This project is a starting point for a Flutter application.
+- Beautiful UI
+- Messenger System
+- Social Feed like facebook/twitter
+- Firebase Auth (not complete yet)
+- Firebase Storage (not complete yet)
+- Firebase Firestore (not complete yet)
 
-A few resources to get you started if this is your first Flutter project:
+## Preview
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p float="left">
+  <img src="img/preview1.png" width="300" />
+  <img src="img/preview2.png" width="300" /> 
+</p>
